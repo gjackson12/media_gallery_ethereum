@@ -32,6 +32,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Media</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">All Media</a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <i class="fas fa-user" alt="current account"></i>
@@ -44,24 +50,21 @@
 
   <div class="card">
     <div class="card-header row">
-      <div class="input-group col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
-        <input class="form-control" type="search" id="search-input" placeholder="Search for media by address">
-        <span class="input-group-append">
-          <button class="btn btn-outline-secondary" type="submit" onclick="App.loadMedia(); return false;">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <button class="btn btn-info btn-md float-right" data-toggle="modal" data-target="#newMediaModal">New Media</button>
-      </div>
+        <div class="input-group col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
+            <input class="form-control" type="search" id="search-input">
+            <span class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit" onclick="App.loadMedia(); return false;" >
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4">
+              <button class="btn btn-info btn-md float-right" data-toggle="modal" data-target="#newMediaModal">New Media</button>
+          </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="row">
-      <h4 class="float-left" id="search-message"></h4>
-    </div>
     <div class="row" id="mediaDisplay">
       <!-- Media Assets Load Here -->
     </div>
@@ -112,9 +115,6 @@
       <div class="card">
         <div class="card-header media-title"></div>
         <img class="card-img-top" class="img-center img-rounded" src="">
-        <video class="card-img-top" width="320" height="240" style="display: none;" controls>
-          <source src="" type="">
-        </video>
         <div class="card-body">
           <p class="card-text media-description"></p>
         </div>
@@ -152,14 +152,6 @@
                     <tr>
                       <th class="w-25" scope="row">Media Multi-Hash</th>
                       <td class="w-75 details_hash"></td>
-                    </tr>
-                    <tr>
-                      <th class="w-25" scope="row">Media Type</th>
-                      <td class="w-75 details_type"></td>
-                    </tr>
-                    <tr>
-                      <th class="w-25" scope="row">Media Extension</th>
-                      <td class="w-75 details_extension"></td>
                     </tr>
                   </tbody>
                 </table>

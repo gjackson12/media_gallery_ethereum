@@ -1,0 +1,10 @@
+#accountBalance, #account {
+    font-size: 0.75rem;
+    color: white;
+    margin-right: 0.75rem;
+    margin-left: 0.45rem;
+}
+
+.badge {
+    margin-right: 0.75em;
+}
