@@ -4,6 +4,8 @@ App = {
   account: 0x0,
   ipfs: null,
   fileRep: null,
+  file: null,
+  loading: false,
 
   init: function () {
     App.createIpfs();
@@ -46,6 +48,8 @@ App = {
 
     App.displayAccountInfo();
 
+    App.checkAccount();
+
     return App.initContract();
   },
 
@@ -63,6 +67,15 @@ App = {
     });
   },
 
+  checkAccount: function () {
+    setInterval(function () {
+      if (web3.eth.accounts[0] !== App.account) {
+        App.account = web3.eth.accounts[0];
+        App.loadMedia();
+      }
+    }, 100);
+  },
+
   initContract: function () {
     $.getJSON("MediaGallery.json", function (mediaGalleryArtifact) {
       App.contracts.MediaGallery = TruffleContract(mediaGalleryArtifact);
@@ -77,7 +90,11 @@ App = {
 
   captureFile: function (_event) {
     _event.preventDefault();
+
     var file = _event.target.files[0];
+
+    App.file = file;
+
     var reader = new window.FileReader();
     if (file) {
       reader.readAsArrayBuffer(file);
@@ -89,29 +106,44 @@ App = {
   },
 
   loadMedia: function () {
+    if (App.loading) {
+      return;
+    }
+
+    App.loading = true;
+
+    var searchVal = $('#search-input').val();
+
+    if (searchVal.length == 42) {
+      searchAccount = searchVal;
+      $('#search-message').text('Search results with media assets for: ' + searchAccount);
+    } else {
+      searchAccount = App.account;
+      $('#search-message').text('');
+    }
+
     var mediaGalleryInstance;
 
     App.displayAccountInfo();
 
     App.contracts.MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
-      
-      mediaGalleryInstance.getMediaByAddress(App.account).then((mediaIds) => {
+
+      mediaGalleryInstance.getMediaByAddress(searchAccount).then((mediaIds) => {
         $("#mediaDisplay").empty();
 
         for (var i = 0; i < mediaIds.length; i++) {
-          var mediaId = mediaIds[i];
-
-          mediaGalleryInstance.mediaDatabase(App.account, mediaId.toNumber()).then((media) => {
-            
-            App.displayMedia(media[1], media[2], media[3], media[4], media[5], media[6]);
+          mediaGalleryInstance.mediaDatabase(searchAccount, i).then((media) => {
+            App.displayMedia(media[1], media[2], media[3], media[4], media[5], media[6], media[7], media[8]);
           });
         }
       })
     })
+
+    App.loading = false;
   },
 
-  displayMedia: function (_name, _description, _author, _createDate, _tags, _mediaHash) {
+  displayMedia: function (_name, _description, _author, _createDate, _tags, _mediaHash, _mediaType, _extension) {
     var mediaDisplay = $("#mediaDisplay");
 
     var dateNumber = _createDate.toNumber();
@@ -119,10 +151,23 @@ App = {
 
     var tagArray = _tags.split(',,;');
 
-    var _modalId = _name.replace(/ /g,'').toLowerCase() + _mediaHash;
+    var _modalId = _name.replace(/ /g, '').toLowerCase() + _mediaHash;
 
     var cardTemplate = $("#cardTemplate");
-    cardTemplate.find('img').attr('src', 'http://ipfs.io/ipfs/' + _mediaHash);
+
+    if (_mediaType == 'video') {
+      cardTemplate.find('source').attr('src', 'https://ipfs.io/ipfs/' + _mediaHash);
+      cardTemplate.find('source').attr('type', _mediaType + '/' + _extension);
+      cardTemplate.find('video').attr('style', '');
+      cardTemplate.find('img').attr('style', 'display: none;');
+    } else {
+      cardTemplate.find('img').attr('src', 'http://ipfs.io/ipfs/' + _mediaHash);
+      cardTemplate.find('img').attr('style', '');
+      cardTemplate.find('video').attr('style', 'display: none;');
+      cardTemplate.find('source').attr('src', '');
+      cardTemplate.find('source').attr('type', '');
+    }
+
     cardTemplate.find(".media-title").text(_name);
     cardTemplate.find(".media-description").text(_description);
     cardTemplate.find(".media-date").text(date);
@@ -136,14 +181,14 @@ App = {
     }
 
     mediaDisplay.append(cardTemplate.html());
-  
-    App.createMediaDetailsModal(_name, _author, date, _mediaHash, _modalId);
+
+    App.createMediaDetailsModal(_name, _author, date, _mediaHash, _modalId, _mediaType, _extension);
   },
 
-  createMediaDetailsModal: function(_name, _author, _date, _mediaHash, _modalId) {
+  createMediaDetailsModal: function (_name, _author, _date, _mediaHash, _modalId, _mediaType, _extension) {
     var modalContainer = $("#modalContainer");
-    
-    if ($('#' + _modalId).length > 0 ) {
+
+    if ($('#' + _modalId).length > 0) {
       return;
     }
 
@@ -153,6 +198,8 @@ App = {
     modalTemplate.find(".details_author").text(_author);
     modalTemplate.find(".details_date").text(_date);
     modalTemplate.find(".details_hash").text(_mediaHash);
+    modalTemplate.find(".details_type").text(_mediaType);
+    modalTemplate.find(".details_extension").text(_extension);
 
     modalContainer.append(modalTemplate.html());
   },
@@ -161,6 +208,8 @@ App = {
     var _media_title = $("#media_title").val();
     var _description = $("#media_description").val();
     var _tags = $("#tags").val();
+    var _mediaType = App.file.type.match(/^([^\/]*)/g)[0];
+    var _extension = App.file.type.match(/([^/]+$)/g)[0];
 
     if (_media_title.trim() == "") {
       return false;
@@ -178,7 +227,9 @@ App = {
             _media_title,
             _description,
             result[0].hash,
-            _tags, {
+            _tags,
+            _mediaType,
+            _extension, {
               from: App.account,
               gas: 500000
             }
@@ -193,7 +244,7 @@ App = {
 
   listenForEvents: function () {
     App.contracts.MediaGallery.deployed().then(function (instance) {
-      instance.LogNewMediaAsset().watch(function (error, event) {
+      instance.LogNewMediaAsset({}, {}).watch(function (error, event) {
         if (event) {
           App.loadMedia();
         } else {
@@ -208,7 +259,4 @@ $(function () {
   $(window).load(function () {
     App.init();
   });
-  $(".modal").on("hidden.bs.modal", function(){
-    $(".modal-body1").html("");
-})
 });
