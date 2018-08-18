@@ -1,18 +1,19 @@
 pragma solidity ^0.4.24;
 
-contract MediaGallery {
+import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
+
+contract MediaGallery is Ownable {
 
     //Author: Graham Jackson
     //Date: 27 August 2018
     //Version: MediaGallery v1.0 Rinkeby
-    /* 
+    /*
     This contract provides the ability to create a library of media assets
     which are referenced via a hash and are meant to be stored/retrieved via 
     the inter-planetary file systme (IPFS).
     */
 
     bool public isStopped;      //State variabe used to stop/start the contract
-    address owner;              //The address of the owner of the contract
     uint public mediaCounter;   //A count of the total media assets added to the contract
 
     //Each poster address consists of an array of MediaAsset structs
@@ -51,27 +52,13 @@ contract MediaGallery {
         _;
     }
 
-    //Modifier to restrict functions to the contract owner
-    modifier onlyAuthorized {
-        require(
-            msg.sender == owner,
-            "Sender not authorized."
-        );
-        _;
-    }
-
-    //Contract constructor that sets the owner upon depoyment
-    constructor() public {
-        owner = msg.sender;
-    }
-
     //Funcion that allows the contract owner to stop the contract
-    function stopContract() public onlyAuthorized {
+    function stopContract() public onlyOwner {
         isStopped = true;
     }
 
     //Function that allows the contract owner to re-enable the contract
-    function resumeContract() public onlyAuthorized {
+    function resumeContract() public onlyOwner {
         isStopped = false;
     }
 
