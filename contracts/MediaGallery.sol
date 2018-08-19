@@ -1,7 +1,9 @@
 pragma solidity ^0.4.24;
 
+// import Open Zeppelin contract for Owner function authorization
 import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
+/** @title Media Gallery. */
 contract MediaGallery is Ownable {
 
     //Author: Graham Jackson
@@ -52,17 +54,24 @@ contract MediaGallery is Ownable {
         _;
     }
 
-    //Funcion that allows the contract owner to stop the contract
+    /** @dev Stops the contract.*/
     function stopContract() public onlyOwner {
         isStopped = true;
     }
 
-    //Function that allows the contract owner to re-enable the contract
+    /** @dev Resume the contract.*/
     function resumeContract() public onlyOwner {
         isStopped = false;
     }
 
-    //Add a new media asset and trigger associated event
+    /** @dev Add mew media asset and trigger associted event.
+      * @param _name Name of the media asset.
+      * @param _description Description of the media asset.
+      * @param _mediaHash Multi-haash of the media asset.
+      * @param _tags List of tags for media asset.
+      * @param _mediaType File type of media asset.
+      * @param _extension File extension of media asset.
+    */
     function addMedia(
         string _name,
         string _description,
@@ -110,7 +119,10 @@ contract MediaGallery is Ownable {
         mediaCounter++;
     }
 
-    //Retrieve unique identifiers for media assets provided by a particular address
+    /** @dev Retrieve unique identifiers for media assets for a particular address.
+      * @param _user Address to retrieve media identifiers for.
+      * @return mediaAssetIds An array of media identifiers for provided address.
+    */
     function getMediaByAddress(address _user) public view returns (uint[]) {
         //Check to see if the address has provided any media assets yet
         require(mediaDatabase[_user].length > 0, "No media found for this user");
