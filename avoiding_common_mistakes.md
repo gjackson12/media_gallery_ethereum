@@ -56,4 +56,4 @@ The blockchain is immutable in the sense that a once approved transaction is goi
 
 I have added a tool called Solidity-Coverage in order to generate a report to understand how extensive my test coverage is for the MediaGallery contract.
 
-The report for my test coverage can be found here: [a relative link](coverage/contracts/index.html)
+The report for my test coverage can be found here: [Solidity Coverage Report](http://htmlpreview.github.io/?https://github.com/gjackson12/media_gallery_ethereum/blob/master/coverage/contracts/index.html)
