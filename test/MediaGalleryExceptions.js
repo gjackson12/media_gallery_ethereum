@@ -23,7 +23,7 @@ contract('MediaGallery', (accounts) => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance; 
 
-            return instance.getMediaByAddress(poster);
+            return instance.getNumberMediaByAddress(poster);
         }).then(assert.fail)
         .catch((error) => {
             assert.include(error.message, "revert", "The error message should contain 'revert'");

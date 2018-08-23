@@ -70,14 +70,13 @@ contract('MediaGallery', (accounts) => {
   });
 
   // retrieve asset id(s) for a particular address
-  it("should return the ids for all Media assets posted by a given address", () => {
+  it("should return the number of media assets posted by a given address", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
 
-      return mediaGalleryInstance.getMediaByAddress(poster);
+      return mediaGalleryInstance.getNumberMediaByAddress(poster);
     }).then((data) => {
-      assert.equal(data.length, 1, "media ids array must contain 1 id");
-      assert.equal(data[0].toNumber(), 0, "the media id in array should equal 0");
+      assert.equal(data.toNumber(), 1, "number of media assets shoud be " + data);
     })
   });
 

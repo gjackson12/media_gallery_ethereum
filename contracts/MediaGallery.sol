@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity 0.4.24;
 
 // import Open Zeppelin contract for Owner function authorization
 import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
@@ -14,7 +14,7 @@ import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 */
 contract MediaGallery is Ownable {
 
-    bool public isStopped;      //State variabe used to stop/start the contract
+    bool public isStopped;      //State variable used to stop/start the contract
     uint public mediaCounter;   //A count of the total media assets added to the contract
     uint public maximumNameLength = 125; //The maximum allowed length of a media asset name
     uint public maximumDescLength = 250; //The maximum allowed length of a media asset description
@@ -132,19 +132,11 @@ contract MediaGallery is Ownable {
       * @param _user Address to retrieve media identifiers for.
       * @return mediaAssetIds An array of media identifiers for provided address.
     */
-    function getMediaByAddress(address _user) public view returns (uint[]) {
+    function getNumberMediaByAddress(address _user) public view returns (uint) {
         //Check to see if the address has provided any media assets yet
         require(mediaDatabase[_user].length > 0, "No media found for this user");
 
-        uint[] memory mediaAssetIds = new uint[](mediaDatabase[_user].length);
-
-        uint numberOfMediaAssets = 0;
-
-        for(uint i = 0; i < mediaDatabase[_user].length;  i++) {
-            mediaAssetIds[numberOfMediaAssets] = mediaDatabase[_user][i].id;
-            numberOfMediaAssets++;
-        }
-        return mediaAssetIds;
+        return mediaDatabase[_user].length;
     }
 
     /** 

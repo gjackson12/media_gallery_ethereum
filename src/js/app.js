@@ -129,10 +129,10 @@ App = {
     App.contracts.MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
 
-      mediaGalleryInstance.getMediaByAddress(searchAccount).then((mediaIds) => {
+      mediaGalleryInstance.getNumberMediaByAddress(searchAccount).then((numberOfMedia) => {
         $("#mediaDisplay").empty();
 
-        for (var i = 0; i < mediaIds.length; i++) {
+        for (var i = 0; i < numberOfMedia; i++) {
           mediaGalleryInstance.mediaDatabase(searchAccount, i).then((media) => {
             App.displayMedia(media[1], media[2], media[3], media[4], media[5], media[6], media[7], media[8]);
           });
