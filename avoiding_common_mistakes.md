@@ -51,4 +51,9 @@ I have mitigated against this risk by:
 
 * Not using tx.origin and instead msg.sender
 
-## 8. 
+## 8. Solid Code Coverage
+The blockchain is immutable in the sense that a once approved transaction is going to stay. Since smart contract deployment happens through a transaction, this results in the inability to fix issues quickly. That is why having a reliable set of tests is so crucial.
+
+I have added a tool called Solidity-Coverage in order to generate a report to understand how extensive my test coverage is for the MediaGallery contract.
+
+The report for my test coverage can be found here: [a relative link](coverage/contracts/index.html)
