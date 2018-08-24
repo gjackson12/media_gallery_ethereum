@@ -2,6 +2,7 @@ pragma solidity 0.4.24;
 
 // import Open Zeppelin contract for Owner function authorization
 import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "../node_modules/openzeppelin-solidity/contracts/lifecycle/Destructible.sol";
 
 /// @title Media Gallery, upload media asset representations to Ethereum
 /// @author Graham Jackson
@@ -12,7 +13,7 @@ import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
     which are referenced via a hash and are meant to be stored/retrieved via 
     the inter-planetary file systme (IPFS).
 */
-contract MediaGallery is Ownable {
+contract MediaGallery is Ownable, Destructible {
 
     bool public isStopped;      //State variable used to stop/start the contract
     uint public mediaCounter;   //A count of the total media assets added to the contract
