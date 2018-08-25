@@ -1,8 +1,8 @@
 var MediaGallery = artifacts.require("./MediaGallery");
 
-var SampleLibraryContract = artifacts.require("./SampleLibraryContract");
+var LibraryDemo = artifacts.require("./LibraryDemo");
 
 module.exports = function(deployer) {
   deployer.deploy(MediaGallery);
-  deployer.deploy(SampleLibraryContract);
+  deployer.deploy(LibraryDemo);
 };

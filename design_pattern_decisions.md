@@ -2,6 +2,12 @@
 
 While writing my contract I explored a number of design patterns to verify if they would be of use in the context of my application.
 
+I implemented the following patterns for the MediaGallery contract:
+* Fail Early, Fail Loud
+* Restricting Access
+* Mortal
+* Emergency Stop/Circuit Breaker
+
 In the sections below I provide my rationale for why or why I didn't use a particular pattern.
 
 ## 1. Fail Early, Fail Loud
@@ -37,6 +43,8 @@ Additionally, I have made validation functions that are only used internally, in
 I chose not to leverage the auto deperecation pattern because I did not have a functional reason to have the contract expire at a parictular time.
 
 ## 4. Mortal
+
+I implemented the mortal design pattern by providing a way to destroy the MediaGallery contract after it has been deployed. I leveraged the Open Zeppelin framework's library called, "Destructible", in order to provide the contract's owner the ability to destroy the deployed contract via the `destroy` function. This is important because if I ever decide to deploy a new version of the MediaGallery contract, I don't want users to continue to use the old contract.
 
 ## 5. Withdrawl Pattern
 

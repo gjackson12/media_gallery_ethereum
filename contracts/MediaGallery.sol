@@ -69,7 +69,7 @@ contract MediaGallery is Ownable, Destructible {
     }
 
     /** 
-      * @dev Add mew media asset and trigger associted event.
+      * @dev Add new media asset and trigger associated event.
       * @param _name Name of the media asset.
       * @param _description Description of the media asset.
       * @param _mediaHash Multi-haash of the media asset.
