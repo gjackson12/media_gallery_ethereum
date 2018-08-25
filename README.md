@@ -1,5 +1,7 @@
 # Media Gallery
 
+<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/home_1.png" width="500" height="500">
+
 **MediaGallery** is a decentralized application (DApp) library to upload and share media assets on the Ethereum blockchain.
 
 # Inspiration:
@@ -23,4 +25,7 @@ When adding a new media assset a user is asked to provide the following:
 * **Description**: A description of the media asset that will be shared. The description provided needs to be 250 characters or less.
 * **Tags**: Addiitonal keywords you wish to attach to the media asset. The total length of the tags needs to be 150 characters or less.
 
-<img src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/add_media_modal.png" width="250" height="250">
+<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/add_media_modal.png" width="500" height="500">
+
+
+
