@@ -134,9 +134,6 @@ contract MediaGallery is Ownable, Destructible {
       * @return mediaAssetIds An array of media identifiers for provided address.
     */
     function getNumberMediaByAddress(address _user) public view returns (uint) {
-        //Check to see if the address has provided any media assets yet
-        require(mediaDatabase[_user].length > 0, "No media found for this user");
-
         return mediaDatabase[_user].length;
     }
 

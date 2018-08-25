@@ -1,5 +1,9 @@
 var MediaGallery = artifacts.require("./MediaGallery.sol");
 
+/** 
+  * Tests scenarios where exceptions should occur for the Media Gallery contract.I have supplied a brief comment/description 
+  * below for each test ncluded to provide context and justification.
+*/
 contract('MediaGallery', (accounts) => {
     var mediaGalleryInstance;
     var poster = accounts[1];
@@ -19,17 +23,7 @@ contract('MediaGallery', (accounts) => {
     "zXJGOenfbToAdG3RWxV26mMRBoaMGNtWFW1p9pDPEiQYW6CQylDLr5qFvYDZFQUWs1QNZkS";
     var invalidHash = "Uusz8nU1MY0rbsLadys5Ug5xIoU0fsa4UEThaYFRxEpCczx";
 
-    it("should throw an exception if a user don't have any media yet", () => {
-        return MediaGallery.deployed().then((instance) => {
-            mediaGalleryInstance = instance; 
-
-            return instance.getNumberMediaByAddress(poster);
-        }).then(assert.fail)
-        .catch((error) => {
-            assert.include(error.message, "revert", "The error message should contain 'revert'");
-        });
-    });
-
+    // This test verifies that if someone other than the owner tries to stop the contract, an error is thrown.
     it("should throw an exception if someone other than the owner tries to stop the contract", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;
@@ -41,6 +35,7 @@ contract('MediaGallery', (accounts) => {
         });
     });
 
+    // This test verifies that if someone other than the owner tries to re-enable the contract, an error is thrown.
     it("should throw an exception if someone other than the owner tries to re-enable the contract", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;
@@ -52,6 +47,10 @@ contract('MediaGallery', (accounts) => {
         });
     });
 
+    /**
+     * This test verifies that if a name is provided for a media asset that is longer than 125 characters long, an
+     * error is thrown.
+    */
     it("should throw an exception if the media name submitted is too long", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;
@@ -71,6 +70,10 @@ contract('MediaGallery', (accounts) => {
         });
     });
 
+    /**
+     * This test verifies that if a description is provided for a media asset that is longer than 250 characters long,
+     * an error is thrown.
+    */
     it("should throw an exception if the media description submitted is too long", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;
@@ -90,6 +93,10 @@ contract('MediaGallery', (accounts) => {
         });
     });
 
+    /**
+     * This test verifies that if the media tags provided for a media asset is longer than 150 characters long,
+     * an error is thrown.
+    */
     it("should throw an exception if the media tags submitted is too long", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;
@@ -109,6 +116,10 @@ contract('MediaGallery', (accounts) => {
         });
     });
 
+    /**
+     * This test verifies that if a hash is provided for a media asset that is not equal to 46 characters,
+     * an error is thrown.
+    */
     it("should throw an exception if the media hash submitted is not a valid length", () => {
         return MediaGallery.deployed().then((instance) => {
             mediaGalleryInstance = instance;

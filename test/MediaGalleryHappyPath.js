@@ -1,5 +1,9 @@
 var MediaGallery = artifacts.require("./MediaGallery.sol");
-
+/** 
+ * Tests the 'happy path' for the Media Gallery contract. Happy path in this case means testing the default scenario
+ * where no exceptions or error conditions occur. I have supplied a brief comment/description below for each test
+ * included to provide context and justification.
+*/
 contract('MediaGallery', (accounts) => {
   var mediaGalleryInstance;
   var poster = accounts[1];
@@ -11,7 +15,7 @@ contract('MediaGallery', (accounts) => {
   var mediaExtension1 = "png";
   var owner = accounts[0];
 
-  // contract is iniitalized with the appropriate values
+  // The purpose of this test is to ensure the contract is iniitalized with the appropriate values...
   it("should be initialized with empty values", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
@@ -26,7 +30,11 @@ contract('MediaGallery', (accounts) => {
     })
   });
 
-  // add first media asset
+  /**
+   * This test is testing the ability to add a new media asset. Checks within this test include ensuring an event is emitted,
+   * log values are accurate, the number of media assets has increased by one, and that the data in the struct representing
+   * the media has been defined accurately.
+  */
   it("should let us add a media asset", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
@@ -69,7 +77,10 @@ contract('MediaGallery', (accounts) => {
     });
   });
 
-  // retrieve asset id(s) for a particular address
+  /**
+   * This test validates that we can retrieve the number of media assets that have been added by a particular address. This
+   * function is critical for the application's ability to retrieve media asssets. 
+  */
   it("should return the number of media assets posted by a given address", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
@@ -80,7 +91,11 @@ contract('MediaGallery', (accounts) => {
     })
   });
 
-  // stop posters from having the ability to add new media assets
+  /**
+   * The purpose of this test is to verify the ability to stop the AddMedia function on the Media Gallery contract.
+   * This is verified by executing the stopContract function, and attempting to add a new media asset, and ensuring
+   * an error is thrown.
+  */
   it("should stop the contract by not allowing new media", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
@@ -102,11 +117,15 @@ contract('MediaGallery', (accounts) => {
       );
     }).then(assert.fail)
     .catch((error) => {
-      assert(true);
+      assert.include(error.message, "revert", "The error message should contain 'revert'");
     });
   });
 
-  // re-enable the ability add new media
+  /**
+   * The purpose of this test is to verify the ability to resume the contract. This is verified by executing the
+   * resumeContract function, attempting to add a new media asset, ensuring a new event is emitted for a new media
+   * asset, and that the new struct representing the media asset has accurate data.
+  */
   it("should re-enable the contract by allowing new media", () => {
     return MediaGallery.deployed().then((instance) => {
       mediaGalleryInstance = instance;
