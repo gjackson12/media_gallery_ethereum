@@ -1,6 +1,6 @@
 # Media Gallery
 
-<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/home_1.png" width="500" height="500">
+<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/home_1.png">
 
 **MediaGallery** is a decentralized application (DApp) library to upload and share media assets on the Ethereum blockchain.
 
@@ -27,5 +27,16 @@ When adding a new media assset a user is asked to provide the following:
 
 <img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/add_media_modal.png" width="500" height="500">
 
+After submitting a new media asset you need to submit/sign the transaction via Metadata. Once the transaction has been mined an event will be emitted indicating that a new media asset has been added, and the page will re-load displaying the shared media. You will see the video/image, the title, the description, and the associated tags.
 
+<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/home_2.png">
 
+Additionally, you can view more metadata by clicking on the view details button for a given media asset. You will see the following:
+
+* **Author Address**: The address of the account that shared the media asset.
+* **Media Create Date**: The datetime stamp via the block.timestamp to detail when the media was shared on the blockchain.
+* **Media Multi-Hash**: The multi-hash for the media asset that was shared.
+* **Media Type**: The type of media shared, either an image or video.
+* **Media Extension**: The extension for the media file shared.
+
+<img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/media_details_modal.png">
