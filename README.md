@@ -110,6 +110,25 @@ If you don't have the MetaMask extension (or another wallet provider) follow ins
 
 * Click where it says "Ethereum Main Network" and select "Localhost 8545". Click the back arrow to return to your account.
 
-* You should see your first test account now has 100 ETH. Additional generated accounts will also have this amount.
+* You should see your first test account now has close to 99 ETH (less than 100 becasue by now you have deployed the contract). Additional generated accounts will also have 100 ETH.
 
 * Click referesh in your browser and you should see your account # and balance in the top right-hand corner of the navigation bar.
+
+### Optional: Deploy to IPFS
+
+Since this app is just a bunch of HTML and JavaScript, you can also deploy and use it directly from IPFS. This will require that you run a local IPFS daemon. Just run:
+
+```
+./deploy.sh
+```
+
+### Troubleshooting Tips
+
+#### 1. Slow Performance
+
+This application is leveraging infura to upload files to IPFS so it can take up to 30 seconds before Metamask prompts you to sign/submit a transaction.  Be patient!
+
+:warning: YOU NEED TO HAVE INTERNET ACCESS TO UPLOAD FILES!
+
+
+#### 2. 
