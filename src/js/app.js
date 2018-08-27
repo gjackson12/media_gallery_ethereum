@@ -109,7 +109,6 @@ App = {
     if (App.loading) {
       return;
     }
-
     App.loading = true;
 
     var searchVal = $('#search-input').val();
@@ -141,6 +140,8 @@ App = {
     })
 
     App.loading = false;
+
+    $(".loading").hide();
   },
 
   displayMedia: function (_name, _description, _author, _createDate, _tags, _mediaHash, _mediaType, _extension) {
@@ -205,6 +206,7 @@ App = {
   },
 
   addMedia: function () {
+    $(".loading").show();
     var _media_title = $("#media_title").val();
     var _description = $("#media_description").val();
     var _tags = $("#tags").val();
@@ -238,6 +240,7 @@ App = {
         .then(function (result) {})
         .catch(function (err) {
           console.error(err);
+          $(".loading").hide();
         });
     });
   },
