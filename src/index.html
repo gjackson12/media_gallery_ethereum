@@ -82,15 +82,15 @@
               <form>
                 <div class="form-group">
                   <label for="media_title">Title</label>
-                  <input type="text" class="form-control" id="media_title" placeholder="Enter the title of your media" required>
+                  <input type="text" class="form-control" id="media_title" placeholder="Enter the title of your media" maxlength="125" required>
                 </div>
                 <div class="form-group">
                   <label for="media_description">Description</label>
-                  <textarea type="text" class="form-control" id="media_description" placeholder="Enter the description of your media" required></textarea>
+                  <textarea type="text" class="form-control" id="media_description" placeholder="Enter the description of your media" maxlength="250" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="media_tags">Tags</label>
-                  <input class="form-control" name="tags" id="tags" required/>
+                  <input class="form-control" name="tags" id="tags" maxlength="150" required/>
                 </div>
                 <div class="form-group">
                   <input type='file' id="media_upload" onChange={App.captureFile(event)} required/>

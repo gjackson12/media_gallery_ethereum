@@ -17,9 +17,9 @@ contract MediaGallery is Ownable, Destructible {
 
     bool public isStopped;      //State variable used to stop/start the contract
     uint public mediaCounter;   //A count of the total media assets added to the contract
-    uint public maximumNameLength = 125; //The maximum allowed length of a media asset name
-    uint public maximumDescLength = 250; //The maximum allowed length of a media asset description
-    uint public maximumTagsLength = 150; //The maximum allowed length of a media asset tags
+    uint public maximumNameLength = 50; //The maximum allowed length of a media asset name
+    uint public maximumDescLength = 90; //The maximum allowed length of a media asset description
+    uint public maximumTagsLength = 75; //The maximum allowed length of a media asset tags
     uint public hashLength = 46; //The valid length of an IPFS hash
 
     //Each poster address consists of an array of MediaAsset structs

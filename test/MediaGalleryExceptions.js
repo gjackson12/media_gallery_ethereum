@@ -13,14 +13,10 @@ contract('MediaGallery', (accounts) => {
     var mediaTags1 = "tag1,,;tag2,,;tag3";
     var mediaType1 = "image";
     var mediaExtension1 = "png";
-    var invalidName = "30rJKcVF2e15Bbo24Qp0JAmOA9zMjg6I76m3NhgCeqwORnBodGHMGtGK" + 
-    "KtoRFzqly7gWYRLjKkv037sp3X0lBKu5m2D78FnSTN9Rh6IqhMnG5uMqr0JbWbeaDmv6P6s9qa36a4wh4q3L4qQ6LOAutKI";
-    var invalidDesc = "37d5ouTdD3v8Hzwg71Z5nTtGkwrvgrEAQTFLNiBTMy1sHuEMoKAxdY667a9sXCXQpVxjnTtwbeZ0k" + 
-    "VKtOPZXkhnvDZimaINnJD38qX1F0PkUMXUPm1WMHtxWLdeVh2JClEPyFJkeLkp2V" + 
-    "Q0ImeWBiAtFuHPIPKM50SV5xhbyLIzOzXrcXeXiEUc45RAueM7GnyeinwYbnuzyEPh5Najsog7" + 
-    "4K4lSOYYIExkTwWdXyCq3Y6spPy7iCAKlWq2";
-    var invalidTags = "NViPFmcshbGAnPlyj6vD7DkeKY4VLutq0SNY8zkofOuvZl662mDcW8dPsGez9rLcmCNpx5AnO8niXBgy" +
-    "zXJGOenfbToAdG3RWxV26mMRBoaMGNtWFW1p9pDPEiQYW6CQylDLr5qFvYDZFQUWs1QNZkS";
+    var invalidName = "FShgZuvzjZbbCBqLNuDJtwKtSRkdqWcUUfAjawFXTBBpaTqrhdff";
+    var invalidDesc = "zQjLKzVYkTbLCRuKvERcmNLAMfYyVNKJSShkGWdjXEHALbbXcFReehQuCdvBDHPEyLuuYphrrnchifujt" + 
+    "QpembkFuPzQjLKzVYkTbLCRuKvERcmNLAMfYyVNKJSShkGWdjXEHALbbXcFReehQuCdvBDHPEyLuuYphrrnchifujtQpembkFuPrg";
+    var invalidTags = "ZyhByPGmgTeKBmLwMDfRWHNPYnUGdjEQNJKFEcrJWTVLCWiEKgkTPZJPBzmVrbvrRaCuqRYFVjig";
     var invalidHash = "Uusz8nU1MY0rbsLadys5Ug5xIoU0fsa4UEThaYFRxEpCczx";
 
     // This test verifies that if someone other than the owner tries to stop the contract, an error is thrown.
