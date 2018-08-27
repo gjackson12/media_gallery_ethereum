@@ -19,11 +19,11 @@ The purpose of this Media Galleru DApp as mentioned before is to allow anyone wi
 
 Any file that is shared is stored on the interplanetary file system (IPFS). The IPFS service returns a [multi-hash](https://github.com/multiformats/multihash#table-for-multihash-v100-rc-semver) which is a self describing hash. This hash is stored on the contract with the other metadata describing the shared media asset such as name, description, and tags.
 
-When adding a new media assset a user is asked to provide the following:
+When adding a new media assset a user is asked to provide the following (all three inputs are required):
 
-* **Name**: The name of the media asset that will be shared. The name provided needs to be 125 characters or less.
-* **Description**: A description of the media asset that will be shared. The description provided needs to be 250 characters or less.
-* **Tags**: Addiitonal keywords you wish to attach to the media asset. The total length of the tags needs to be 150 characters or less.
+* **Name**: The name of the media asset that will be shared. The name provided needs to be 50 characters or less.
+* **Description**: A description of the media asset that will be shared. The description provided needs to be 90 characters or less.
+* **Tags**: Addiitonal keywords you wish to attach to the media asset. The total length of the tags needs to be 75 characters or less.
 
 <img align="center" src="https://github.com/gjackson12/media_gallery_ethereum/blob/master/src/images/add_media_modal.png" width="500" height="500">
 
