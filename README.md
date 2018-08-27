@@ -131,4 +131,6 @@ This application is leveraging infura to upload files to IPFS so it can take up 
 :warning: YOU NEED TO HAVE INTERNET ACCESS TO UPLOAD FILES!
 
 
-#### 2. 
+#### 2. Metamask Issues
+
+If upon trying to add a image you are not being prompted by metamask to submit a transaction, try selecting a different network, and then selecting "Localhost 8545" again. Also, check that the account you are attempting to use still exists on your local blockchain instance of ganache-cli. 
